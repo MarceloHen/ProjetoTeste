@@ -140,7 +140,7 @@ public class TelaLogin extends javax.swing.JFrame {
             return;
         }
         try {
-            conex.executaSQL("select * from Cadastros  where usuario_cadastro='" + jTextFieldUsuario.getText() + "'");
+            conex.executaSQL("select * from Cadastros where usuario_cadastro='" + jTextFieldUsuario.getText() + "'");
             conex.getRs().first();
             if (conex.getRs().getString("senha_cadastro").equals(jPasswordFieldSenha.getText())) {
                 TelaMenu tela = new TelaMenu();

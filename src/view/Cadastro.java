@@ -424,7 +424,7 @@ public class Cadastro extends javax.swing.JFrame {
             }
         }*/
         if (jTextFieldID.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Informe um id válido");
+            JOptionPane.showMessageDialog(this, "Informe um ID válido");
             limparTela();
             return;
         }        

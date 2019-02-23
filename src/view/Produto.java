@@ -336,7 +336,7 @@ public class Produto extends javax.swing.JFrame {
             }
         }*/
         if (jTextFieldCodigo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Informe um id válido");
+            JOptionPane.showMessageDialog(this, "Informe um ID válido");
             return;
         }
         try {
