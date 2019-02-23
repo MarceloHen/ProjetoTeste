@@ -387,18 +387,20 @@ public class Cadastro extends javax.swing.JFrame {
         /*l.ler();
         exibirCadastro(l.primeiro());*/
         try {
-            String sql = ("update Cadastros set nome_cadastro=?,sobrenome_cadastro=?,usuario_cadastro=?,senha_cadastro=?,confsenha_cadastro=?,email_cadastro=? where cod_cadastro=?");
-            PreparedStatement pst = conex.getConexaoBD().prepareStatement(sql);
-            pst.setString(1, jTextFieldNome.getText());
-            pst.setString(2, jTextFieldSobrenome.getText());
-            pst.setString(3, jTextFieldUsuario.getText());
-            pst.setString(4, jPasswordFieldSenha.getText());
-            pst.setString(5, jPasswordFieldConfSenha.getText());
-            pst.setString(6, jTextFieldEmail.getText());
-            pst.setInt(7, Integer.parseInt(jTextFieldID.getText()));
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Alterado com sucesso");
-            jButtonNovoActionPerformed(evt);
+            if(validarCampos()){
+                String sql = ("update Cadastros set nome_cadastro=?,sobrenome_cadastro=?,usuario_cadastro=?,senha_cadastro=?,confsenha_cadastro=?,email_cadastro=? where cod_cadastro=?");
+                PreparedStatement pst = conex.getConexaoBD().prepareStatement(sql);
+                pst.setString(1, jTextFieldNome.getText());
+                pst.setString(2, jTextFieldSobrenome.getText());
+                pst.setString(3, jTextFieldUsuario.getText());
+                pst.setString(4, jPasswordFieldSenha.getText());
+                pst.setString(5, jPasswordFieldConfSenha.getText());
+                pst.setString(6, jTextFieldEmail.getText());
+                pst.setInt(7, Integer.parseInt(jTextFieldID.getText()));
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Alterado com sucesso");
+                jButtonNovoActionPerformed(evt);
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Erro:\n" + ex.getMessage());
             limparTela();
@@ -504,7 +506,7 @@ public class Cadastro extends javax.swing.JFrame {
             jPasswordFieldConfSenha.setText(conex.getRs().getString("confsenha_cadastro"));
             jTextFieldEmail.setText(conex.getRs().getString("email_cadastro"));
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro 'Primeiro':\n" + ex.getMessage());
+            //JOptionPane.showMessageDialog(this, "Erro 'Primeiro':\n" + ex.getMessage());
         }
     }//GEN-LAST:event_jButtonPrimeiroActionPerformed
 
@@ -532,7 +534,7 @@ public class Cadastro extends javax.swing.JFrame {
             jPasswordFieldConfSenha.setText(conex.getRs().getString("confsenha_cadastro"));
             jTextFieldEmail.setText(conex.getRs().getString("email_cadastro"));
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro 'Anterior':\n" + ex.getMessage());
+            //JOptionPane.showMessageDialog(this, "Erro 'Anterior':\n" + ex.getMessage());
         }
     }//GEN-LAST:event_jButtonAnteriorActionPerformed
 
@@ -560,7 +562,7 @@ public class Cadastro extends javax.swing.JFrame {
             jPasswordFieldConfSenha.setText(conex.getRs().getString("confsenha_cadastro"));
             jTextFieldEmail.setText(conex.getRs().getString("email_cadastro"));
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro 'Próximo':\n" + ex.getMessage());
+            //JOptionPane.showMessageDialog(this, "Erro 'Próximo':\n" + ex.getMessage());
         }
     }//GEN-LAST:event_jButtonProximoActionPerformed
 
@@ -589,7 +591,7 @@ public class Cadastro extends javax.swing.JFrame {
             jPasswordFieldConfSenha.setText(conex.getRs().getString("confsenha_cadastro"));
             jTextFieldEmail.setText(conex.getRs().getString("email_cadastro"));
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro 'Último':\n" + ex.getMessage());
+            //JOptionPane.showMessageDialog(this, "Erro 'Último':\n" + ex.getMessage());
         }
     }//GEN-LAST:event_jButtonUltimoActionPerformed
 
@@ -610,7 +612,7 @@ public class Cadastro extends javax.swing.JFrame {
                 dados.add(new Object[]{conex.getRs().getInt("cod_cadastro"), conex.getRs().getString("nome_cadastro"), conex.getRs().getString("sobrenome_cadastro"), conex.getRs().getString("usuario_cadastro"), conex.getRs().getString("senha_cadastro"), conex.getRs().getString("confsenha_cadastro"), conex.getRs().getString("email_cadastro")});
             } while (conex.getRs().next());
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Erro 'Peencher Tabela':\n" + ex.getMessage());
+            //JOptionPane.showMessageDialog(this, "Erro 'Peencher Tabela':\n" + ex.getMessage());
         }
         Tabela tabel = new Tabela(dados, Colunas);
         jTableCadastro.setModel(tabel);
@@ -641,7 +643,7 @@ public class Cadastro extends javax.swing.JFrame {
             jTextFieldUsuario.setText(cad.getUsuario());
             jTextFieldID.setText(Integer.toString(cad.getId()));
             jPasswordFieldSenha.setText(cad.getSenha());
-            jPasswordFieldConfSenha.setText("");
+            jPasswordFieldConfSenha.setText(cad.getConfsenha());
             jTextFieldEmail.setText(cad.getEmail());
         }
     }
